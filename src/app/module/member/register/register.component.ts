@@ -43,9 +43,7 @@ private createForm() {
 /*  Access to login form fields */
 get login() { return this.registerForm.controls; }
 
-/* Go to the page basedon type
- @param mobile is user input
- @param password is user input
+/* on click of submit button
 */
 public onClickSubmit() {
   this.submitted = true;
