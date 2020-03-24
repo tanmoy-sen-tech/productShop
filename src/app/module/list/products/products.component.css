@@ -1,0 +1,36 @@
+.paddingzero{
+  padding: 0;
+}
+.marginzero{
+  margin: 0;
+}
+.category-image img{
+  width: 100%;
+  height: 320px;
+}
+.category-name{
+  padding-bottom: 40px;
+  font-size: 18px;
+  margin: 0;
+}
+.category-full-banner {
+  text-align: center;
+  padding: 40px;
+}
+.product-name{
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0;
+  font-size: 13px;
+}
+.price{
+  color: rgba(61, 57, 57, 0.815);
+  font-size: 13px;
+}
+.borderzero{
+  border: none;
+}
+.productlink{
+  min-height: 403px;
+  cursor: pointer;
+}

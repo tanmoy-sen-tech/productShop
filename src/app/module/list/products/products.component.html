@@ -1,0 +1,24 @@
+<div class="row marginzero">
+  <!--mens outwear-->
+  <div  class="men-item1 col-12 col-sm-12 col-md-12 paddingzero">
+    <a class="category-image"><img src="../../../assets/mens_outerwear.jpg"></a>
+    <div class="category-full-banner"><p class="category-name">Men's Outwear({{products?.length?products.length : 0}})</p>
+      <div *ngIf="products?.length" class="row">
+        <div *ngFor="let item of products" class="col-12 col-sm-6 col-md-4 mb-3">
+          <div class="card borderzero">
+          <a class="productlink"> <img class="card-img-top" src="../../../../assets/lo1.jpg" alt="Card image cap"></a>
+            <div class="card-body">
+              <p class="card-text product-name">{{item.productName}}</p>
+              <p class="price">{{item.price | currency:'INR'}}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div *ngIf="!products?.length">
+No product to show
+      </div>
+
+</div>
+    </div>
+    </div>

@@ -1,0 +1,32 @@
+
+{
+  "products": [
+    { "productName":"abc",
+      "price":1400
+    },
+    { "productName":"xyz",
+      "price":1400
+    },
+    { "productName":"uio",
+      "price":1900
+    }
+   
+  ],
+  "mockRegister": 
+{"statusCode":200,
+"message":"succes"
+    },
+   
+    "mockLogin": 
+      {
+        "statusCode":200,
+      "message":"succes",
+      "user":{ "name":"tanmoy",
+        "typeId":1
+
+      }
+          }
+
+          
+          
+    }
