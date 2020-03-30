@@ -13,8 +13,13 @@ export class UrlConfig {
              userRegister: this.apiMock + 'register',
              mockLogin: this.apiMock + 'mockLogin',
              mockRegister: this.apiMock + 'mockRegister',
+             mockPurchased: this.apiMock + 'purchasedproducts',
              product: this.apiMock + 'products',
-             cartdata: this.apiMock + 'cart'
+             cartdata: this.apiMock + 'cart',
+             addProduct: this.apiMock + 'products',
+             searchProduct: this.apiMock + 'products',
+             buyProduct: this.apiMock + 'products',
+             reviewProduct: this.apiMock + 'products'
         };
     }
     /* url config with url Server list */
@@ -24,8 +29,12 @@ export class UrlConfig {
             userRegister: this.apiHost + 'register',
             mockLogin: this.apiHost + 'mockLogin',
             mockRegister: this.apiHost + 'mockRegister',
+            mockPurchased: this.apiHost + 'purchasedproducts',
             product: this.apiHost + 'products',
-            cartdata: this.apiHost + 'cart'
+            addProduct: this.apiHost + 'products',
+            searchProduct: this.apiHost + 'products',
+            buyProduct: this.apiHost + 'products',
+            reviewProduct: this.apiHost + 'products'
         };
     }
 

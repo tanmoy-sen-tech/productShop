@@ -21,10 +21,25 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private api: Service,
     private url: UrlConfig,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {
-    // this.routerPath = router.url;
+    this.routerPath = router.url;
   }
+    /* Modal Action
+  @param Ok modal has been closed
+ */
+public modalAction(action: string): void {
+  if (action === 'Ok') {
+    this.spinner = false;
+    this.api.alertConfigDefaultValue();
+  } else {
+    this.spinner = false;
+    this.api.alertConfigDefaultValue();
+    this.router.navigate(['/member/login']);
+
+  }
+}
 /*  Login form controls creation */
 private createForm() {
   this.loginForm = this.fb.group({
@@ -51,13 +66,22 @@ public onClickSubmit() {
     console.log(postObject);
         /* Api call*/
     this.api.postCall(this.url.urlConfig().userLogin, postObject, 'post').subscribe(data => {
-          if (data.user) {
-            this.router.navigate(['/list/products'], { state: { data: data.user.type
-            }});
-          } else {
-            // this.api.alertConfig = this.api.modalConfig('Error', 'Username/Password is not valid', true, [{ name: 'Ok' }]);
+      if(data.statusCode === 607 ) {
+        if (data.user) {
+          const userDetails = {
+          userName: data.user.name,
+          emailId: data.user.emailId
+        };
+          sessionStorage.setItem('currentUser', JSON.stringify(userDetails));
+          this.router.navigate(['/list/products'], { state: { data: data.user.type
+        }});
+      } else {
+         this.api.alertConfig = this.api.modalConfig('Error', '${data.message}', true, [{ name: 'Ok' }]);
 
-          }
+      }
+      } else {
+        this.api.alertConfig = this.api.modalConfig('Error', '${data.message}', true, [{ name: 'Ok' }]);
+      }
         },
           error => {
           });
@@ -83,7 +107,9 @@ public onClickSubmit() {
 
 /* Oninit call */
 ngOnInit() {
+  this.router.navigate(['/member/login']);
   this.createForm();
+  this.notificationService.sendRoute(this.routerPath);
 }
 
 }

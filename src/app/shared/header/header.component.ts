@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public logout(): void {
     sessionStorage.clear();
     this.notificationService.clearMessages();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/member/login']);
   }
   /* navigate to cart page */
   cartPage() {
@@ -52,12 +52,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public getRoutepath() {
     this.subscrptionroute = this.notificationService.getRoute().subscribe(route => {
-      this.routerpath = route;
       if (route) {
         this.routerpath = route;
       } else {
         this.routerpath = null;
       }
+      console.log(this.routerpath);
   });
 
 

@@ -7,11 +7,12 @@ import { ProductsComponent } from './products/products.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModuleModule } from './../../shared/shared-module.module';
 import { RouterModule } from '@angular/router';
+import { HistoryComponent } from './history/history.component';
 
 
 
 @NgModule({
-  declarations: [ListComponent, ProductsComponent],
+  declarations: [ListComponent, ProductsComponent, HistoryComponent],
   imports: [
     CommonModule,
     ListRoutingModule,

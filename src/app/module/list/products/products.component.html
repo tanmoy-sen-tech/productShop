@@ -1,8 +1,16 @@
 <div class="row marginzero">
   <!--mens outwear-->
   <div  class="men-item1 col-12 col-sm-12 col-md-12 paddingzero">
-    <a class="category-image"><img src="../../../assets/mens_outerwear.jpg"></a>
-    <div class="category-full-banner"><p class="category-name">Men's Outwear({{products?.length?products.length : 0}})</p>
+    <a class="category-image">
+      <h3>Welcome {{ userDetail?.userName }}</h3>
+      <img src="../../../assets/mens_outerwear.jpg"></a>
+    <div class="category-full-banner">
+    
+            <div class="ui-inputgroup center-flex">
+                <input [(ngModel)]="searchstring" class="full-width" type="text" pInputText placeholder="Keyword"> 
+                <button pButton type="button" label="Search" (click)="searchProduct()"></button>        
+           </div>
+      <p class="category-name">Men's Outwear({{products?.length?products.length : 0}})</p>
       <div *ngIf="products?.length" class="row">
         <div *ngFor="let item of products" class="col-12 col-sm-6 col-md-4 mb-3">
           <div class="card borderzero">
@@ -10,6 +18,9 @@
             <div class="card-body">
               <p class="card-text product-name">{{item.productName}}</p>
               <p class="price">{{item.price | currency:'INR'}}</p>
+              <div class="rating"><p-rating  [(ngModel)]="item.reviews" readonly="true" stars="5" [cancel]="false"></p-rating></div>
+              
+              <a class="shop-now " (click)="buyNow(item)" >Buy Now</a>
             </div>
           </div>
         </div>
@@ -22,3 +33,5 @@ No product to show
 </div>
     </div>
     </div>
+    <app-spinner [spinner]="spinner"></app-spinner>
+    <app-alert [alertObj]="api.alertConfig" *ngIf="api.alertConfig?.modalShow" (buttonAction)="modalAction($event)"></app-alert>

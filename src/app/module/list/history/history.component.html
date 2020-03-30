@@ -1,0 +1,23 @@
+<h3>Purchase History</h3>
+<div *ngIf="products?.length" class="row">
+    <div *ngFor="let item of products" class="col-12 col-sm-6 col-md-6 mb-3">
+      <div class="card borderzero customAlign">
+      <a class="productlink col-12 col-sm-6 col-md-6 mb-3"> <img class="card-img-top" src="../../../../assets/lo1.jpg" alt="Card image cap"></a>
+        <div class="card-body col-12 col-sm-6 col-md-6 mb-3">
+          <p class="card-text product-name">{{item.productName}}</p>
+          <p class="price">{{item.price | currency:'INR'}}</p>
+          <div *ngIf="item.reviewFlag" class="rating"><p-rating  [(ngModel)]="item.rating" readonly="true" stars="5" [cancel]="false"></p-rating></div>
+          <div *ngIf="!item.reviewFlag" class="rating"><p-rating  [(ngModel)]="rating"  stars="5"[cancel]="false"></p-rating></div>
+          <p *ngIf="item.reviewFlag" class="price">{{item.review !== null ? item?.review : "no review" }}</p>
+          <textarea class="customTextArea" *ngIf="!item.reviewFlag" [(ngModel)]="review" pInputTextarea  ></textarea>
+          <a *ngIf="!item.reviewFlag" class="shop-now " (click)="submitReview(item)" >Submit</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div *ngIf="!products?.length">
+    No product to show
+          </div>
+<app-spinner [spinner]="spinner"></app-spinner>
+<app-alert [alertObj]="api.alertConfig" *ngIf="api.alertConfig?.modalShow" (buttonAction)="modalAction($event)"></app-alert>

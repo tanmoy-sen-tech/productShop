@@ -21,11 +21,11 @@
   font-weight: bold;
   text-align: center;
   margin-bottom: 0;
-  font-size: 13px;
+  font-size: 16px;
 }
 .price{
   color: rgba(61, 57, 57, 0.815);
-  font-size: 13px;
+  font-size: 14px;
 }
 .borderzero{
   border: none;
@@ -33,4 +33,20 @@
 .productlink{
   min-height: 403px;
   cursor: pointer;
+}
+.full-width {
+  width: 50%;
+}
+.center-flex{
+  justify-content: center;
+}
+.shop-now{
+  text-decoration: none;
+  border: 2px solid black;
+  color: #000;
+  padding: 10px 40px;
+  cursor: pointer;
+}
+.rating{
+  margin:10px 0px;
 }

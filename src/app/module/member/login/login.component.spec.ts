@@ -8,6 +8,7 @@ import { PrimeModule } from 'src/app/shared/primeng-module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Router } from '@angular/router';
 import { UrlConfig } from 'src/app/service/url-config';
+import { of } from 'rxjs';
 
 describe('LoginComponent', () => {
 
@@ -19,6 +20,16 @@ describe('LoginComponent', () => {
     };
     /* create mock data for testing */
     const MockUserService = {
+      getList() {
+        return of({
+          statusCode: 200,
+          message: 'ok',
+          user:{ name: 'Tanmoy',
+                typeId:1
+          }
+      }
+      );
+      },
       modalConfig: () => ({
         header: '',
         message: '',
@@ -49,13 +60,25 @@ describe('LoginComponent', () => {
       mockRouter = TestBed.get(Router);
       api = TestBed.get(Service);
     }));
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+      fixture = TestBed.createComponent(LoginComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
+    it('on click submit ', () => {
+      component.submitted = false;
+      component.onClickSubmit();
+      component.submitted = true;
+      expect(component.loginForm.valid).toBeFalsy();
+      component.loginForm.controls.userEmail.setValue('test@gmail.com');
+      component.loginForm.controls.password.setValue('123456789');
+      expect(component.loginForm.valid).toBeTruthy();
+        });
+    it('get login ', () => {
+          return component.loginForm.controls;
+            });
 });

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { Service } from 'src/app/service/service';
 import { UrlConfig } from 'src/app/service/url-config';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/service/notification-service';
 interface UserType {
   name: string;
   code: number;
@@ -22,7 +23,8 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private api: Service,
     private url: UrlConfig,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {
     this.routerPath = router.url;
     this.availableUserType = [
@@ -30,6 +32,20 @@ export class RegisterComponent implements OnInit {
       {name: 'priority', code: 1}
     ];
   }
+  /* Modal Action
+  @param Ok modal has been closed
+ */
+public modalAction(action: string): void {
+  if (action === 'Ok') {
+    this.spinner = false;
+    this.api.alertConfigDefaultValue();
+  } else {
+    this.spinner = false;
+    this.api.alertConfigDefaultValue();
+    this.router.navigate(['/member/login']);
+
+  }
+}
 /*  Login form controls creation */
 private createForm() {
   this.registerForm = this.fb.group({
@@ -57,15 +73,16 @@ public onClickSubmit() {
     console.log(postObject);
         /* Api call*/
     this.api.postCall(this.url.urlConfig().userRegister, postObject, 'post').subscribe(data => {
-          if (data.statusCode === 200) {
+          if (data.statusCode === 607) {
             this.router.navigate(['/member/login']);
             this.spinner = false;
           } else {
-            // this.api.alertConfig = this.api.modalConfig('Error', 'Username/Password is not valid', true, [{ name: 'Ok' }]);
+            this.api.alertConfig = this.api.modalConfig('Error', '${data.message}', true, [{ name: 'Ok' }]);
             this.spinner = false;
           }
         },
           error => {
+            this.api.alertConfig = this.api.modalConfig('Error', 'failed', true, [{ name: 'Ok' }]);
             this.spinner = false;
           });
   }
@@ -85,7 +102,7 @@ public onClickSubmit() {
 /* Oninit call */
 ngOnInit() {
   /* Check whether login/not */
-  // this.notificationService.sendRoute( this.routerPath );
+  this.notificationService.sendRoute( this.routerPath );
   // if (!this.common.validUser()) {
   //   this.router.navigate(['/']);
   // }
